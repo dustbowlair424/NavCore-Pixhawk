@@ -228,6 +228,10 @@ Original MATLAB INS: [ins-system-for-drone](https://github.com/ARYA-mgc/ins-syst
 MIT License
 
    
+<<<<<<< HEAD
     
+    
+=======
+>>>>>>> b16a5b3f7d018aaf891479ff76ba282dba5a0ad8
     
  
