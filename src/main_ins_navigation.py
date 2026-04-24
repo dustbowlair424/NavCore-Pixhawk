@@ -39,6 +39,9 @@ from ekf_core         import EKFCore
 from imu_noise_params import IMUNoiseParams
 from dead_reckon      import DeadReckon
 from ins_logger       import INSLogger
+from adaptive_pid     import AdaptivePID
+from optical_flow_ins import OpticalFlowINS
+import os
 
 # ── Logging setup ──────────────────────────────────────────────
 logging.basicConfig(
@@ -90,6 +93,8 @@ class INSNavigationSystem:
         self.dr     = DeadReckon(self.noise)
         self.logger = INSLogger("logs/ins_data.csv")
         self.bridge = MAVLinkBridge(connection_string, baud)
+        self.adaptive_pid = AdaptivePID(kp_base=1.0, ki_base=0.1, kd_base=0.05)
+        self.optical_flow = OpticalFlowINS()
 
         # bookkeeping
         self._imu_count  = 0
@@ -174,6 +179,10 @@ class INSNavigationSystem:
                 # Even in GPS-denied mode, log GPS fix quality
                 self.bridge.last_gps = msg
 
+            elif mtype == "OPTICAL_FLOW_RAD":
+                self.optical_flow.update(msg, self.ekf.state["euler"][2])
+
+
             # ── periodic tasks ─────────────────────────────────
             if t_now - self._last_log >= self.LOG_INTERVAL_S:
                 self._log_state(t_now)
@@ -188,12 +197,33 @@ class INSNavigationSystem:
                 self._last_stats = t_now
 
     # ── helpers ────────────────────────────────────────────────
+    def _get_pi_temp(self) -> float:
+        try:
+            with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
+                return float(f.read().strip()) / 1000.0
+        except Exception:
+            return 0.0
+
     def _log_state(self, t: float):
         elapsed = t - self._start_time
         pos = self.ekf.state["pos"]
         vel = self.ekf.state["vel"]
         att = np.degrees(self.ekf.state["euler"])
-        self.logger.write(elapsed, pos, vel, att, self.ekf.P)
+        
+        # Adaptive PID simulation (using Z error as example)
+        # Assuming target Z is 0 for this simulation
+        z_error = 0.0 - pos[2] 
+        self.adaptive_pid.update(z_error, self.LOG_INTERVAL_S)
+        pid_gains = self.adaptive_pid.get_gains()
+        
+        pi_temp = self._get_pi_temp()
+        
+        if pi_temp > 80.0:
+            self.bridge.send_statustext(f"WARNING: Pi Temp High: {pi_temp:.1f}C", 4) # MAV_SEVERITY_WARNING
+
+        flow_pos, flow_vel = self.optical_flow.get_state()
+        
+        self.logger.write(elapsed, pos, vel, att, self.ekf.P, pi_temp, flow_vel, pid_gains)
 
     def _print_state(self, t: float):
         elapsed = t - self._start_time

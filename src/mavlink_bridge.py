@@ -134,6 +134,7 @@ class MAVLinkBridge:
             129,  # SCALED_IMU3
             30,   # ATTITUDE
             24,   # GPS_RAW_INT
+            106,  # OPTICAL_FLOW_RAD
         ]
         for mid in msg_ids:
             conn.mav.command_long_send(

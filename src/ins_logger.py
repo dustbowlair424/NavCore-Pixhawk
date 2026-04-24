@@ -29,6 +29,8 @@ class INSLogger:
         "vx_ms", "vy_ms", "vz_ms",
         "roll_deg", "pitch_deg", "yaw_deg",
         "P_trace",
+        "pi_temp_c", "flow_vx", "flow_vy",
+        "pid_kp", "pid_ki", "pid_kd"
     ]
 
     def __init__(self, filepath: str = "logs/ins_data.csv",
@@ -50,13 +52,17 @@ class INSLogger:
 
     def write(self, t: float, pos: np.ndarray,
               vel: np.ndarray, att_deg: np.ndarray,
-              P: np.ndarray):
+              P: np.ndarray, pi_temp: float = 0.0,
+              flow_vel: np.ndarray = np.zeros(2),
+              pid_gains: tuple = (0.0, 0.0, 0.0)):
         row = [
             f"{t:.4f}",
             f"{pos[0]:.4f}", f"{pos[1]:.4f}", f"{pos[2]:.4f}",
             f"{vel[0]:.4f}", f"{vel[1]:.4f}", f"{vel[2]:.4f}",
             f"{att_deg[0]:.3f}", f"{att_deg[1]:.3f}", f"{att_deg[2]:.3f}",
             f"{np.trace(P):.6f}",
+            f"{pi_temp:.1f}", f"{flow_vel[0]:.4f}", f"{flow_vel[1]:.4f}",
+            f"{pid_gains[0]:.4f}", f"{pid_gains[1]:.4f}", f"{pid_gains[2]:.4f}"
         ]
         self._csv.writerow(row)
 
