@@ -1,5 +1,5 @@
 
- # 🛸 INS Navigation — Pixhawk Cube Orange + Raspberry Pi 4
+ #  INS Navigation — Pixhawk Cube Orange + Raspberry Pi 4
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)](https://python.org)
 [![MAVLink](https://img.shields.io/badge/Protocol-MAVLink%202.0-green)](https://mavlink.io)
@@ -11,7 +11,7 @@
 
 ---
 
-## 📌 What This Does
+##  What This Does
 
 | Feature | Detail |
 |---|---|
@@ -24,7 +24,7 @@
 
 ---
 
-## 🗂️ Repository Structure
+## Repository Structure
 
 ```
 ins-drone-pixhawk/
@@ -50,7 +50,7 @@ ins-drone-pixhawk/
 
 ---
 
-## 🔌 Hardware Wiring
+##  Hardware Wiring
 
 ```
 Pixhawk Cube Orange                  Raspberry Pi 4
@@ -76,12 +76,12 @@ Baud rate: 921600
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Setup Raspberry Pi 4
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/ins-drone-pixhawk
+git clone https://github.com/ARYA-mgc/ins-drone-pixhawk
 cd ins-drone-pixhawk
 chmod +x scripts/setup_rpi4.sh
 ./scripts/setup_rpi4.sh
@@ -137,7 +137,7 @@ pytest tests/test_ins.py -v
 
 ---
 
-## 🧠 System Architecture
+##  System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -173,7 +173,7 @@ pytest tests/test_ins.py -v
 
 ---
 
-## ⚙️ Tuning
+##  Tuning
 
 Edit `config/noise_params.yaml`:
 
@@ -196,7 +196,7 @@ mag:
 
 ---
 
-## 📊 Log Analysis
+##  Log Analysis
 
 Logs are saved to `logs/ins_data.csv`:
 
@@ -208,7 +208,7 @@ Plot with any CSV viewer, pandas, or MATLAB `readtable`.
 
 ---
 
-## 🔒 Safety Notes
+## Safety Notes
 
 - **Never arm the drone** with `arm()` from code unless you are sure props are clear.
 - Test with props removed first.
@@ -217,20 +217,14 @@ Plot with any CSV viewer, pandas, or MATLAB `readtable`.
 
 ---
 
-## 👤 Author
+##  Author
 
 **ARYA MGC**  
 Original MATLAB INS: [ins-system-for-drone](https://github.com/ARYA-mgc/ins-system-for-drone)  
 
 ---
 
-## 📄 License
-
-MIT License
-
----
-
-## 📷 Project Documentation & Logs
+## Project Documentation & Logs
 
 ### Hardware Assembly & Flight Test
 <img src="flight_test_v2.jpg" width="600">
